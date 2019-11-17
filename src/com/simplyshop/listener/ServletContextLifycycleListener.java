@@ -16,7 +16,16 @@ public class ServletContextLifycycleListener implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent sce) {
+		String dropTables = sce.getServletContext().getInitParameter("dropTables");
 		String createTables = sce.getServletContext().getInitParameter("createTables");
+
+		if (dropTables.equalsIgnoreCase("Yes")) {
+			System.out.println("Droping tables.");
+			DbUtil.dropTables();
+		} else {
+			System.out.println("No need to drop the tables");
+		}
+
 		if (createTables.equalsIgnoreCase("Yes")) {
 			System.out.println("Creating tables.");
 			DbUtil.createTables();

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.StringJoiner;
 
 public class DbUtil {
 
@@ -23,12 +24,44 @@ public class DbUtil {
 
 	public static void createTables() {
 		try (Connection con = getCon(); Statement stmt = con.createStatement()) {
-			String USER_TABLE = "CREATE TABLE SS_USER(EMAIL VARCHAR(255), NAME VARCHAR(255))";
-			String LOGIN_TABLE = "CREATE TABLE SS_LOGIN(EMAIL VARCHAR(255), PASSWORD VARCHAR(255), STATUS VARCHAR(20))";
+			stmt.execute(buildCreateUserTableQuery());
+			stmt.execute(buildCreateLoginTableQuery());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void dropTables() {
+		try (Connection con = getCon(); Statement stmt = con.createStatement()) {
+			String USER_TABLE = "DROP TABLE SS_USER";
+			String LOGIN_TABLE = "DROP TABLE SS_LOGIN";
 			stmt.execute(USER_TABLE);
 			stmt.execute(LOGIN_TABLE);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static String buildCreateUserTableQuery() {
+		StringJoiner joiner = new StringJoiner("");
+		joiner.add("CREATE TABLE SS_USER");
+		joiner.add("(");
+		joiner.add("EMAIL VARCHAR(255) PRIMARY KEY, ");
+		joiner.add("AGE INT, ");
+		joiner.add("GENDER VARCHAR(55), ");
+		joiner.add("NAME VARCHAR(255)");
+		joiner.add(")");
+		return joiner.toString();
+	}
+
+	private static String buildCreateLoginTableQuery() {
+		StringJoiner joiner = new StringJoiner("");
+		joiner.add("CREATE TABLE SS_LOGIN");
+		joiner.add("(");
+		joiner.add("EMAIL VARCHAR(255) PRIMARY KEY, ");
+		joiner.add("PASSWORD VARCHAR(255) NOT NULL, ");
+		joiner.add("STATUS VARCHAR(55)");
+		joiner.add(")");
+		return joiner.toString();
 	}
 }

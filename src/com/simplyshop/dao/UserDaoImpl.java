@@ -21,19 +21,22 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void save(User user) {
 		System.out.println(">> save of " + this.getClass().getSimpleName());
-	/*	
+		
 		Login login = new Login();
 		login.setEmail(user.getEmail());
 		login.setPassword(user.getPassword());
 		login.setStatus("Not Verified");
-		loginDao.save(login);*/
+		loginDao.save(login);
 		
-		String SAVE_USER = "INSERT INTO SS_USER VALUES(?, ?)";
+		String SAVE_USER = "INSERT INTO SS_USER VALUES(?, ?, ?, ?)";
 		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(SAVE_USER)) {
 			pstmt.setString(1, user.getEmail());
-			pstmt.setString(2, user.getName());
+			pstmt.setInt(2, user.getAge());
+			pstmt.setString(3, user.getGender());
+			pstmt.setString(4, user.getName());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

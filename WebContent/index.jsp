@@ -9,6 +9,7 @@
 <body>
 <jsp:include page="/common/header.jsp" />
 <a href="${pageContext.request.contextPath}/user/registration.jsp">Register</a>
+<a href="${pageContext.request.contextPath}/login">Login</a>
 <jsp:include page="/common/footer.jsp" />
 </body>
 </html>

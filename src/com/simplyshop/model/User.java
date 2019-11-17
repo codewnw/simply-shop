@@ -6,9 +6,19 @@ public class User {
 
 	private String name;
 
-	private Integer age;
-	
+	private int age;
+
 	private String password;
+
+	private String gender;
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public String getPassword() {
 		return password;
@@ -20,7 +30,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", name=" + name + ", age=" + age + "]";
+		return "User [email=" + email + ", name=" + name + ", age=" + age + ", gender=" + gender + "]";
 	}
 
 	public String getEmail() {
@@ -39,11 +49,13 @@ public class User {
 		this.name = name;
 	}
 
-	public Integer getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(Integer age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
+
+
 }

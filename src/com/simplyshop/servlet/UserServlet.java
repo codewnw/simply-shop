@@ -35,12 +35,17 @@ public class UserServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		
 
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
+		user.setPassword(password);
 
 		userService.save(user);
+		
+		response.sendRedirect("index.jsp");
 	}
 
 }
