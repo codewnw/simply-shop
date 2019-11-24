@@ -7,10 +7,10 @@
 <title>Welcome to SimplyShop</title>
 </head>
 <body>
-	<jsp:include page="/common/header.jsp" />
+	<%@ include file="/common/header.jsp" %>
 
-	<h1>Hello, there</h1>
+	<h1>Hello, ${sessionScope.user.name}</h1>
 
-	<jsp:include page="/common/footer.jsp" />
+	<%@ include file="/common/footer.jsp" %>
 </body>
 </html>

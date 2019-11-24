@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +7,9 @@
 <title>Welcome to SimplyShop</title>
 </head>
 <body>
-<jsp:include page="/common/header.jsp" />
-<a href="${pageContext.request.contextPath}/user/registration.jsp">Register</a>
-<a href="${pageContext.request.contextPath}/login">Login</a>
-<jsp:include page="/common/footer.jsp" />
+	<%@ include file="/common/header.jsp"%>
+
+<h1>Welcome, home</h1>
+	<%@ include file="/common/footer.jsp"%>
 </body>
 </html>

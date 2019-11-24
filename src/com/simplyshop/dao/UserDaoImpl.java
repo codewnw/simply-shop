@@ -21,13 +21,13 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void save(User user) {
 		System.out.println(">> save of " + this.getClass().getSimpleName());
-		
+
 		Login login = new Login();
 		login.setEmail(user.getEmail());
 		login.setPassword(user.getPassword());
 		login.setStatus("Not Verified");
 		loginDao.save(login);
-		
+
 		String SAVE_USER = "INSERT INTO SS_USER VALUES(?, ?, ?, ?)";
 		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(SAVE_USER)) {
 			pstmt.setString(1, user.getEmail());
@@ -49,8 +49,10 @@ public class UserDaoImpl implements UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				user = new User();
-				user.setEmail(rs.getString(1));
-				user.setName(rs.getString(2));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setName(rs.getString("NAME"));
+				user.setAge(rs.getInt("AGE"));
+				user.setGender(rs.getString("GENDER"));
 			}
 		} catch (SQLException e) {
 		}

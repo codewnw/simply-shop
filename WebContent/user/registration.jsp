@@ -7,14 +7,14 @@
 <title>User Registration</title>
 </head>
 <body>
-<jsp:include page="/common/header.jsp" />
+<%@ include file="/common/header.jsp" %>
 
 <div class="container">
 <form action="${pageContext.request.contextPath}/users" method="post">
 <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Name</label>
-      <input type="text" class="form-control" name="name" id="inputEmail4" placeholder="Name">
+      <input type="text" class="form-control" name="name" value="${sessionScope.user.name ne null ? sessionScope.user.name : '' }" id="inputEmail4" placeholder="Name">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Mobile</label>
@@ -67,6 +67,6 @@
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
 </div>
-<jsp:include page="/common/footer.jsp" />
+<%@ include file="/common/footer.jsp" %>
 </body>
 </html>
