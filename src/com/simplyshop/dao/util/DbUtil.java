@@ -26,6 +26,7 @@ public class DbUtil {
 		try (Connection con = getCon(); Statement stmt = con.createStatement()) {
 			stmt.execute(buildCreateUserTableQuery());
 			stmt.execute(buildCreateLoginTableQuery());
+			stmt.execute(buildCreateItemTableQuery());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -35,8 +36,10 @@ public class DbUtil {
 		try (Connection con = getCon(); Statement stmt = con.createStatement()) {
 			String USER_TABLE = "DROP TABLE SS_USER";
 			String LOGIN_TABLE = "DROP TABLE SS_LOGIN";
+			String ITEM_TABLE = "DROP TABLE SS_ITEM";
 			stmt.execute(USER_TABLE);
 			stmt.execute(LOGIN_TABLE);
+			stmt.execute(ITEM_TABLE);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,5 +66,9 @@ public class DbUtil {
 		joiner.add("STATUS VARCHAR(55)");
 		joiner.add(")");
 		return joiner.toString();
+	}
+	
+	private static String buildCreateItemTableQuery() {
+		return "CREATE TABLE SS_ITEM(ID VARCHAR(55), NAME VARCHAR(255), DESCRIPTION VARCHAR(1024), IMAGE_URL VARCHAR(1024), PRICE INT, DISCOUNT DECIMAL)";
 	}
 }
