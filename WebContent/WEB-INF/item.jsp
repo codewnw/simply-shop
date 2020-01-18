@@ -11,15 +11,14 @@
 
 	<div class="container mt-5 mb-5">
 		<div class="row row-cols-1 row-cols-md-3">
-			<c:forEach var="item" items="${requestScope.items}">
 				<div class="col mb-4">
 					<div class="card">
-						<a href="${pageContext.request.contextPath}/items/${item.id}/"><img src="${item.imageUrl}" height="300" class="card-img-top"
-							alt="..."></a>
+						<img src="${requestScope.item.imageUrl}" height="300" class="card-img-top"
+							alt="...">
 						<div class="card-body">
-							<h5 class="card-title">${item.name}</h5>
+							<h5 class="card-title">${requestScope.item.name}</h5>
 							<p class="card-text">
-								<strong>Price: </strong> ${item.price}
+								<strong>Price: </strong> ${requestScope.item.price}
 							</p>
 							<div class="row">
 							<div class="col">
@@ -31,7 +30,6 @@
 						
 					</div>
 				</div>
-			</c:forEach>
 
 
 		</div>

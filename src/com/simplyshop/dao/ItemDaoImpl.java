@@ -26,7 +26,26 @@ public class ItemDaoImpl implements ItemDao {
 				items.add(item);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return items;
+	}
+
+	@Override
+	public Item getItem(String id) {
+		Item item = null;
+		String GET_ITEM = "SELECT * FROM SS_ITEM  WHERE ID = ?";
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(GET_ITEM)) {
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			item = new Item(rs.getString("ID"), rs.getString("NAME"), rs.getInt("PRICE"));
+			item.setDiscount(rs.getDouble("DISCOUNT"));
+			item.setDescription(rs.getString("DESCRIPTION"));
+			item.setImageUrl(rs.getString("IMAGE_URL"));
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return item;
 	}
 }

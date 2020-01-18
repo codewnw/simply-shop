@@ -7,4 +7,6 @@ import com.simplyshop.model.Item;
 public interface ItemDao {
 
 	List<Item> getItems();
+
+	Item getItem(String id);
 }
