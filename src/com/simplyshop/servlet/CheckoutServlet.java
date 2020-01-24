@@ -1,6 +1,8 @@
 package com.simplyshop.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,34 +10,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.simplyshop.model.Item;
 import com.simplyshop.service.ItemService;
 import com.simplyshop.service.ItemServiceImpl;
 
-@WebServlet("/items/*")
-public class ItemServlet extends HttpServlet {
+@WebServlet("/checkouts/*")
+public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private ItemService itemService;
 
-	public ItemServlet() {
+	public CheckoutServlet() {
 		itemService = new ItemServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Here");
 		String uri = request.getRequestURI();
-		if (uri.contains("items/ITEM_")) {
+		if (uri.contains("checkouts/ITEM_")) {
 			String[] content = uri.split("/");
 			int length = content.length;
 			System.out.println(content[length - 1]);
-			request.setAttribute("item", itemService.getItem(content[length - 1]));
-			//response.sendRedirect("WEB-INF/item.jsp");
-			request.getRequestDispatcher("/WEB-INF/item.jsp").forward(request, response);
-		} else {
-			request.setAttribute("items", itemService.getItems());
-			request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
-		}
+			List<Item> items = new ArrayList<>();
+			items.add(itemService.getItem(content[length - 1]));
+			request.setAttribute("items", items);
+			request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
+		} else if (uri.contains("checkouts/multiple")) {
 
+		} else {
+
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

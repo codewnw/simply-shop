@@ -10,9 +10,9 @@
 	<%@ include file="/common/header.jsp"%>
 
 	<div class="container mt-5 mb-5">
-		<div class="row row-cols-1 row-cols-md-3">
+		<div class="row">
 			<c:forEach var="item" items="${requestScope.items}">
-				<div class="col mb-4">
+				<div class="col col-md-4 mb-4">
 					<div class="card">
 						<a href="${pageContext.request.contextPath}/items/${item.id}/"><img src="${item.imageUrl}" height="300" class="card-img-top"
 							alt="..."></a>
@@ -24,7 +24,7 @@
 							<div class="row">
 							<div class="col">
 							<a href="#" class="btn btn-primary">Add to Cart</a>
-							<a href="#" class="btn btn-success float-right">Buy Now</a>
+							<a href="${pageContext.request.contextPath}/checkouts/${item.id}/" class="btn btn-success float-right">Buy Now</a>
 							</div>
 						</div>
 						</div>
