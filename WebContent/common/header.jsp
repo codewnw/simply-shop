@@ -43,7 +43,8 @@
 			</c:if>
 			
 			</li>
-		<li class="nav-item pull-right"><a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+		<li class="nav-item pull-right"><a class="nav-link" id="cart" href="${pageContext.request.contextPath}/checkouts/items?">
+		<i class="fa fa-shopping-cart"></i> &nbsp;<span id="item-count" class="badge badge-primary">0</span></a></li>
 		
 	</ul>
 </body>

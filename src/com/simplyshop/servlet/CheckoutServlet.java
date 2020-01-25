@@ -35,7 +35,15 @@ public class CheckoutServlet extends HttpServlet {
 			items.add(itemService.getItem(content[length - 1]));
 			request.setAttribute("items", items);
 			request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
-		} else if (uri.contains("checkouts/multiple")) {
+		} else if (uri.contains("checkouts/items")) {
+			String[] ids = request.getParameterValues("itemId");
+			List<Item> items = new ArrayList<>();
+			for (int i = 0; i < ids.length; i++) {
+				items.add(itemService.getItem(ids[i]));
+			}
+
+			request.setAttribute("items", items);
+			request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
 
 		} else {
 
